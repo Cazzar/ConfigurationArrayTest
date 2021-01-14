@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
+using System.IO;
+using System.Text;
 using Microsoft.Extensions.Configuration;
 
 namespace ConfigurationTest
@@ -11,14 +10,14 @@ namespace ConfigurationTest
         static void Main(string[] args)
         {
             Console.WriteLine("Newtonsoft.JSON");
-            var config = new ConfigurationBuilder().AddNewtonsoftJsonFile("example.json").Build();
+            var config = new ConfigurationBuilder().AddNewtonsoftJsonStream(new MemoryStream(Encoding.ASCII.GetBytes("{ \"Example\": [ \"Item 2\" ] }"))).Build();
             var obj = config.Get<ConfigType>();
 
             Console.WriteLine($"Item Count: {obj.Example.Length}");
             Console.WriteLine($"Items in array: {string.Join(", ", obj.Example)}");
 
             Console.WriteLine("\n\nJSON.net");
-            config = new ConfigurationBuilder().AddJsonFile("example.json").Build();
+            config = new ConfigurationBuilder().AddJsonStream(new MemoryStream(Encoding.ASCII.GetBytes("{ \"Example\": [ \"Item 2\" ] }"))).Build();
             obj = config.Get<ConfigType>();
 
             Console.WriteLine($"Item Count: {obj.Example.Length}");
