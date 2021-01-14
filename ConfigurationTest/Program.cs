@@ -16,7 +16,7 @@ namespace ConfigurationTest
             Console.WriteLine($"Item Count: {obj.Example.Length}");
             Console.WriteLine($"Items in array: {string.Join(", ", obj.Example)}");
 
-            Console.WriteLine("\n\nJSON.net");
+            Console.WriteLine("\n\nSystem.Net.Json");
             config = new ConfigurationBuilder().AddJsonStream(new MemoryStream(Encoding.ASCII.GetBytes("{ \"Example\": [ \"Item 2\" ] }"))).Build();
             obj = config.Get<ConfigType>();
 
